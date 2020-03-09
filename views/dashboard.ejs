@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-sm-4">
+        <h1 class="mt-4">Dashboard</h1>
+        <p class="lead mb-3">Welcome <%= user.name %></p>
+    </div>
+    <div class="col-sm-8 p-5">
+        <a href="/create" class="btn btn-primary">Create Event</a>
+        <a href="/users/logout" class="btn btn-secondary">Logout</a>
+    </div>
+</div>
+
+<div class="container">
+    <% if(events.length > 0){ %>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">S.no</th>
+                <th scope="col">Name</th>
+                <th scope="col">Date</th>
+                <th scope="col">Place</th>
+                <th scope="col">Duration</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% events.forEach(function(event, index) { %>
+            <tr>
+                <th scope="row"><%= index + 1 %></th>
+                <td><%= event.name %></td>
+                <td><%= event.date %></td>
+                <td><%= event.place %></td>
+                <% if(event.isAllDay) {%>
+                <td>All Day</td>
+                <%} else {%>
+                <td><%= event.startTime %> - <%= event.endTime %></td>
+                <% } %>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+
+    <% } else{ %>
+    <p>No Events Created</p>
+    <a href="/create" class="btn btn-primary">Create Event</a>
+    <% } %>
+</div>
